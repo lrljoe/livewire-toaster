@@ -22,12 +22,17 @@
              @endif
              x-transition:leave-end="opacity-0 scale-90"
              @class(['relative duration-300 transform transition ease-in-out max-w-xs w-full pointer-events-auto', 'text-center' => $position->is('center')])
-             :class="toast.select({ error: 'text-white', info: 'text-black', success: 'text-white', warning: 'text-white' })"
         >
             <i x-text="toast.message"
                class="inline-block select-none not-italic px-6 py-3 rounded rounded-sm shadow-lg text-sm w-full {{ $alignment->is('bottom') ? 'mt-3' : 'mb-3' }}"
-               :class="toast.select({ error: 'bg-red-500', info: 'bg-gray-200', success: 'bg-green-600', warning: 'bg-orange-500' })"
+               :class="toast.select(@js($colors ?? [
+                    'error' => 'bg-red-500 dark:bg-red-500 text-white dark:text-white', 
+                    'info' => 'bg-gray-200 dark:bg-gray-200 text-black dark:text-black', 
+                    'success' => 'bg-green-500 dark:bg-green-500 text-white dark:text-white', 
+                    'warning' =>  'bg-orange-500 dark:bg-orange-500 text-white dark:text-white'
+                ]))"
             ></i>
+
 
             @if($closeable)
             <button @click="toast.dispose()" aria-label="@lang('close')" class="absolute right-0 p-2 focus:outline-none focus:outline-hidden rtl:right-auto rtl:left-0 {{ $alignment->is('bottom') ? 'top-3' : 'top-0' }}">

@@ -58,4 +58,15 @@ return [
      * Supported: true | false
      */
     'translate' => true,
+
+    /**
+     * Define custom colors for types
+     *
+     */
+    'colors' => [ 
+        'error' => 'bg-red-500 dark:bg-red-500 text-white dark:text-white',
+        'info' => 'bg-gray-200 dark:bg-gray-200 text-black dark:text-black',
+        'success' => 'bg-green-500 dark:bg-green-500 text-white dark:text-white',
+        'warning' =>  'bg-orange-500 dark:bg-orange-500 text-white dark:text-white',
+    ],
 ];
