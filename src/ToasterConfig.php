@@ -16,6 +16,7 @@ final readonly class ToasterConfig
         public bool $wantsReplacement,
         public bool $wantsSuppression,
         public bool $wantsTranslation,
+        public array $colors
     ) {}
 
     /**
@@ -28,6 +29,7 @@ final readonly class ToasterConfig
      *     replace?: bool,
      *     suppress?: bool,
      *     translate?: bool,
+     *     colors?: array
      * } $config
      */
     public static function fromArray(array $config): self
@@ -41,6 +43,7 @@ final readonly class ToasterConfig
             Arr::get($config, 'replace', false),
             Arr::get($config, 'suppress', false),
             Arr::get($config, 'translate', true),
+            Arr::get($config, 'colors', []),
         );
     }
 
@@ -54,6 +57,16 @@ final readonly class ToasterConfig
         return Position::from($this->position);
     }
 
+    public function colors(): array
+    {
+        return array_merge([
+            'error' => 'bg-red-500 dark:bg-red-500 text-white dark:text-white', 
+            'info' => 'bg-gray-200 dark:bg-gray-200 text-black dark:text-black', 
+            'success' => 'bg-green-500 dark:bg-green-500 text-white dark:text-white', 
+            'warning' =>  'bg-orange-500 dark:bg-orange-500 text-white dark:text-white'
+            ], $this->colors);
+    }
+
     public function toJavaScript(): array
     {
         return [
@@ -61,6 +74,7 @@ final readonly class ToasterConfig
             'duration' => $this->duration,
             'replace' => $this->wantsReplacement,
             'suppress' => $this->wantsSuppression,
+            'colors' => $this->colors,
         ];
     }
 }

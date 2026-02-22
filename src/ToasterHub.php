@@ -25,6 +25,7 @@ final class ToasterHub extends Component
             'config' => $this->config->toJavaScript(),
             'position' => $this->config->position(),
             'toasts' => $this->session->pull(SessionRelay::NAME, []),
+            'colors' => $this->config->colors(),
         ]);
     }
 }
